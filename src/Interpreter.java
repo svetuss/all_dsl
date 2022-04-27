@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.HashMap;
 
 public class Interpreter {
-    HashMap<String,String> scope = new HashMap<>(); // хранилище со значениями переменных, ключ - название переменной, значение - то, чему переменная равна
+    HashMap<String,String> storage = new HashMap<>(); // хранилище со значениями переменных, ключ - название переменной, значение - то, чему переменная равна
 
     public String run(TopTreeNode node) {
         if (node.getClass() == UnarOperationTreeNode.class) {
@@ -14,7 +14,7 @@ public class Interpreter {
             if (((BinOperationTreeNode) node).operator.type.name.equals("ASSIGN")) {
                 String res = this.run(((BinOperationTreeNode) node).rightNode); // формула, которая присваивается переменной
                 VarTreeNode varNode = (VarTreeNode) (((BinOperationTreeNode) node).leftNode);
-                this.scope.put(varNode.var.text, res);
+                this.storage.put(varNode.var.text, res);
                 return res;
             }
             else {
@@ -36,7 +36,7 @@ public class Interpreter {
             }
         }
         if (node.getClass() == VarTreeNode.class) {
-            return scope.get(((VarTreeNode) node).var.text);
+            return storage.get(((VarTreeNode) node).var.text);
         }
         if (node.getClass() == NumberTreeNode.class) {
             return ((NumberTreeNode) node).number.text;
