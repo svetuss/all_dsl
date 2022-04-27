@@ -32,7 +32,7 @@ public class Lexer {
                 Token token = new Token(tokenType, result, this.position_lex);
                 this.position_lex += result.length();
                 if (token.type != TokenType.tokenTypeList[3] && token.type != TokenType.tokenTypeList[2] && token.type != TokenType.tokenTypeList[1])
-                        tokenList.add(token);
+                    tokenList.add(token);
                 return true;
             }
         }
