@@ -28,21 +28,11 @@ public class Lexer {
             String regex = tokenType.regex;
             Matcher matcher = Pattern.compile(regex).matcher(code);
             if (matcher.find(this.position_lex) && matcher.start() == this.position_lex) {
-                boolean new_pos = true;
-                String result = this.code.substring(this.position_lex, this.position_lex+matcher.group().length());
+                String result = this.code.substring(this.position_lex, this.position_lex + matcher.group().length());
                 Token token = new Token(tokenType, result, this.position_lex);
-                for(int j = 0; j < tokenList.size(); j++)
-                {
-                    if (tokenList.get(j).text.equals(token.text) && tokenList.get(j).position == token.position) {
-                        new_pos = false;
-                        break;
-                    }
-                }
-                if (new_pos) {
-                    this.position_lex += result.length();
-                    if (token.type != TokenType.tokenTypeList[3] && token.type != TokenType.tokenTypeList[2] && token.type != TokenType.tokenTypeList[1])
+                this.position_lex += result.length();
+                if (token.type != TokenType.tokenTypeList[3] && token.type != TokenType.tokenTypeList[2] && token.type != TokenType.tokenTypeList[1])
                         tokenList.add(token);
-                }
                 return true;
             }
         }
