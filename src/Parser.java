@@ -113,7 +113,7 @@ public class Parser {
     public TopTreeNode parserMultDiv() {
         TopTreeNode leftNode = parserParentheses();
         Token operator = retCurrent(new String[]{"MULT","DIV"});
-        while (operator != null){
+        while (operator != null) {
             TopTreeNode rightVal = parserParentheses();
             leftNode = new BinOperationTreeNode(operator, leftNode, rightVal);
             operator = retCurrent(new String[]{"MULT","DIV"});
@@ -143,7 +143,7 @@ public class Parser {
         return forNode;
     }
 
-    public TopTreeNode parserWhile(){
+    public TopTreeNode parserWhile() {
         TopTreeNode leftVal = parserFormula();
         Token operator = retCurrent(new String[]{"LESS", "MORE", "EQUAL"});
         TopTreeNode rightVal = parserFormula();
